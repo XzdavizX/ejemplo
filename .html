@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title>¿Quieres ser mi novia?</title>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			background-color: #f5f5f5;
+		}
+
+		button {
+			margin: 10px;
+			padding: 15px 30px;
+			font-size: 20px;
+			display: inline-block;
+			background-color: #2e86c1;
+			background-image: linear-gradient(to bottom right, #2e86c1, #3498db);
+			border: none;
+			color: white;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+			transition: transform 0.2s;
+		}
+
+		button:hover {
+			transform: scale(1.1);
+		}
+
+		#no {
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<h1>¿Quieres ser mi novia?</h1>
+	<p>Hola! Me preguntaba si te gustaría ser mi novia. Si estás interesada, por favor házmelo saber.</p>
+	<div>
+		<button>Sí</button>
+		<button id="no">No</button>
+	</div>
+
+	<script>
+		document.addEventListener('mousemove', function(e) {
+			// Obtener la posición actual del botón "No"
+			var noButton = document.getElementById('no');
+			var rect = noButton.getBoundingClientRect();
+			var x = rect.left + (rect.width / 2);
+			var y = rect.top + (rect.height / 2);
+
+			// Calcular la distancia entre el cursor del mouse y el botón "No"
+			var dx = e.clientX - x;
+			var dy = e.clientY - y;
+			var dist = Math.sqrt(dx*dx + dy*dy);
+
+			// Si el cursor está demasiado cerca del botón "No", moverlo a una posición aleatoria
+			if (dist < 100) {
+				var newX = Math.floor(Math.random() * window.innerWidth);
+				var newY = Math.floor(Math.random() * window.innerHeight);
+				noButton.style.left = newX + "px";
+				noButton.style.top = newY + "px";
+			}
+		});
+        
+	</script>
+    <script>
+        var noButton = document.getElementById("no-button");
+        noButton.style.position = "absolute";
+        noButton.style.top = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight)) + "px";
+        noButton.style.left = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth)) + "px";
+    
+        var shareButton = document.getElementById("share-button");
+        shareButton.addEventListener("click", function() {
+            var url = window.location.href;
+            window.open("https://twitter.com/intent/tweet?url=" + encodeURIComponent(url), "Compartir en Twitter", "width=600,height=400");
+        });
+    </script>
+</body>
+</html>
